@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Helping you calculate your tax</title>
+</head>
+<body>
+
+<h1>Welcome to Personal Income Tax Assessment</h1>
+
+<form action="#" th:action="@{/assessment}" th:object="${entity}" method="post">
+    <p>Monthly Income: <input type="text" th:field="*{monthlySalary}" /></p>
+    <p>Marital Status:
+        <select th:field="*{maritalStatus}">
+            <option th:each="maritalStatusValue : ${allMaritalStatus}"
+                    th:value="${maritalStatusValue}"
+                    th:text="${maritalStatusValue}"></option>
+    </select>
+    </p>
+    <p>Dependent: <input type="text" th:field="*{dependent}" /></p>
+    <p><input type="submit" value="submit"/></p>
+</form>
+
+<div th:if="${result}">
+    <p><span>Monthly Income:</span><span th:text="${result.monthlySalary}"></span></p>
+    <p><span>Marital Status:</span><span th:text="${result.maritalStatus}"></span></p>
+    <p><span>Dependent:</span><span th:text="${result.dependent}"></span></p>
+</div>
+
+</body>
+</html>
