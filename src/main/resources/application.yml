@@ -1,0 +1,6 @@
+server:
+  port: 5050
+tax:
+  rate:
+    - key
+    - key3

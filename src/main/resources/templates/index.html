@@ -14,17 +14,15 @@
         <select th:field="*{maritalStatus}">
             <option th:each="maritalStatusValue : ${allMaritalStatus}"
                     th:value="${maritalStatusValue}"
-                    th:text="${maritalStatusValue}"></option>
-    </select>
+                    th:text="${maritalStatusValue.displayValue}"></option>
+        </select>
     </p>
     <p>Dependent: <input type="text" th:field="*{dependent}" /></p>
     <p><input type="submit" value="submit"/></p>
 </form>
 
 <div th:if="${result}">
-    <p><span>Monthly Income:</span><span th:text="${result.monthlySalary}"></span></p>
-    <p><span>Marital Status:</span><span th:text="${result.maritalStatus}"></span></p>
-    <p><span>Dependent:</span><span th:text="${result.dependent}"></span></p>
+    <p><span>Total Payable:</span><span th:text="${result}"></span></p>
 </div>
 
 </body>

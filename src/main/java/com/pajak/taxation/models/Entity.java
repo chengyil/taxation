@@ -4,8 +4,18 @@ import java.math.BigDecimal;
 
 public class Entity {
     public enum MaritalStatus {
-        MARRIED,
-        SINGLE
+        SINGLE("Single"),
+        MARRIED("Married");
+
+        private String displayValue;
+
+        MaritalStatus(String displayValue) {
+            this.displayValue = displayValue;
+        }
+
+        public String getDisplayValue() {
+            return displayValue;
+        }
     }
     private BigDecimal monthlySalary;
     private MaritalStatus maritalStatus;
