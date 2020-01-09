@@ -14,7 +14,6 @@ class TaxationApplicationTests {
     @Autowired
 	private MockMvc mockMvc;
 
-	@Test
 	public void testAssessmentForm() throws Exception {
 	    mockMvc.perform(MockMvcRequestBuilders.get("/")).
 				andExpect(status().isOk());

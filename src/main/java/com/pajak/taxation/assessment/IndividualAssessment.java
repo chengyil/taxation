@@ -1,21 +1,28 @@
 package com.pajak.taxation.assessment;
 
+import com.pajak.taxation.assessment.relief.IndividualRelief;
+import com.pajak.taxation.assessment.relief.MaritalStatusRelief;
 import com.pajak.taxation.models.Entity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Individual {
+public class IndividualAssessment {
 
     private Entity entity;
 
-    public Individual(Entity entity) {
+    public IndividualAssessment(Entity entity) {
         this.entity = entity;
     }
 
     public BigDecimal assessableIncome() {
-        return entity.getMonthlySalary();//.multiply(new BigDecimal(12));
+        return entity.getMonthlySalary().multiply(new BigDecimal(12)).subtract(calculateRelief());
+    }
+
+    public BigDecimal calculateRelief() {
+        return IndividualRelief.reliefAmount(entity);
     }
 
     public BigDecimal totalPayable() {
@@ -31,7 +38,7 @@ public class Individual {
                 payable = currentAssessable.multiply(rate.getRate()).add(payable);
             }
         }
-        return payable;
+        return payable.setScale(2, RoundingMode.HALF_UP);
     }
 
     private List<TaxRate> taxRates() {
